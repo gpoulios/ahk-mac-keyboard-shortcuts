@@ -156,7 +156,11 @@ Return
 Return
 
 #g::
-  Send, ^g
+  Send, {F3}
+Return
+
+#+g::
+  Send, +{F3}
 Return
 
 ; Text formatting (bold, italic, etc)
