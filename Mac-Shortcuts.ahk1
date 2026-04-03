@@ -340,3 +340,17 @@ Return
 #+4::
   Send, #+{s}
 Return
+
+#IfWinActive ahk_exe explorer.exe
+  #Backspace::
+    Send, {Delete}
+  Return
+
+  #[::
+    Send, !{Left}
+  Return
+
+  #]::
+    Send, !{Right}
+  Return
+#IfWinActive
