@@ -1,0 +1,26 @@
+#SingleInstance, Force
+
+; Would rather use
+;   LWin & Tab::AltTab
+; but then we can't use the shift (reverse). This is invalid
+;   LWin & +Tab::ShiftAltTab
+;
+; Then would put the following in Mac-Shortcuts.ahk1 but
+;   LWin Up::Return
+;   RWin Up::Return
+; interferes.
+
+; Remap LWin-Tab to Alt-Tab
+<#Tab::
+  Send {Alt down}{Tab}
+  Keywait LWin
+  Send {Alt up}
+return
+
+; Remap LWin-Shift-Tab to Alt-Shift-Tab
+<#+Tab::
+  Send {Alt down}{Shift down}{Tab}
+  Keywait LWin
+  Send {Alt up}
+  Send {Shift up}
+return

@@ -1,0 +1,342 @@
+#SingleInstance, Force
+SendMode Input
+
+; Helpers for snapping behaviour
+;
+; Gets the edge that the taskbar is docked to.  Returns:
+;   "top"
+;   "right"
+;   "bottom"
+;   "left"
+GetTaskbarEdge() {
+  WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
+
+  if (TW = A_ScreenWidth) { ; Vertical Taskbar
+    if (TY = 0) {
+      return "top"
+    } else {
+      return "bottom"
+    }
+  } else { ; Horizontal Taskbar
+    if (TX = 0) {
+      return "left"
+    } else {
+      return "right"
+    }
+  }
+}
+
+GetScreenTop() {
+  WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
+  TaskbarEdge := GetTaskbarEdge()
+
+  if (TaskbarEdge = "top") {
+    return TH - 7
+  } else {
+    return 0
+  }
+}
+
+GetScreenLeft() {
+  WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
+  TaskbarEdge := GetTaskbarEdge()
+
+  if (TaskbarEdge = "left") {
+    return TW
+  } else {
+    return 0
+  }
+}
+
+GetScreenWidth() {
+  WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
+  TaskbarEdge := GetTaskbarEdge()
+
+  if (TaskbarEdge = "top" or TaskbarEdge = "bottom") {
+    return A_ScreenWidth
+  } else {
+    return A_ScreenWidth - TW
+  }
+}
+
+GetScreenHeight() {
+  WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
+  TaskbarEdge := GetTaskbarEdge()
+
+  if (TaskbarEdge = "top" or TaskbarEdge = "bottom") {
+    return A_ScreenHeight - TH + 7
+  } else {
+    return A_ScreenHeight
+  }
+}
+
+
+; Copy, paste, cut
+#c::
+  Send, ^c
+Return
+
+#v::
+  Send, ^v
+Return
+
+#x::
+  Send, ^x
+Return
+
+; New, Save, Open
+#n::
+  Send, ^n
+Return
+
+#+n::
+  Send, ^+n
+Return
+
+#s::
+  Send, ^s
+Return
+
+#o::
+  Send, ^o
+Return
+
+; Browser tabs
+#t::
+  Send, ^t
+Return
+
+#w::
+  Send, ^w
+Return
+
+#+t::
+  Send, ^+t
+Return
+
+#r::
+  Send, ^r
+Return
+
+; Select all
+#a::
+  Send, ^a
+Return
+
+; Home/end
+#Right::
+  Send, {End}
+Return
+
+#Left::
+  Send, {Home}
+Return
+
+; Select to end/select to beginning
+#+Right::
+  Send, +{End}
+Return
+
+#+Left::
+  Send, +{Home}
+Return
+
+; Undo/redo
+#z::
+  Send, ^z
+Return
+
+#+z::
+  Send, ^+z
+Return
+
+; Find, find next
+#f::
+  Send, ^f
+Return
+
+#g::
+  Send, ^g
+Return
+
+; Text formatting (bold, italic, etc)
+#b::
+  Send, ^b
+Return
+
+#i::
+  Send, ^i
+Return
+
+#u::
+  Send, ^u
+Return
+
+#k::
+  Send, ^k
+Return
+
+; Send/line break
+#Enter::
+  Send, ^{Enter}
+Return
+
+; 1Password browser shortcut
+#\::
+  Send, ^\
+Return
+
+; Disable Windows key from opening Start menu
+LWin Up::Return
+RWin Up::Return
+
+
+
+; === DELETION ===
+; Delete line to the left (like Cmd+Backspace on Mac)
+#Backspace::
+  Send, +{Home}{Backspace}
+Return
+
+; Delete word to the left (like Option+Backspace on Mac)
+!Backspace::
+  Send, ^{Backspace}
+Return
+
+; Delete word to the right (like Option+Delete on Mac)
+!Delete::
+  Send, ^{Delete}
+Return
+
+; Simulate fn+Backspace on macbook
+$^Backspace::
+  Send, {Delete}
+Return
+
+; === WORD/LINE NAVIGATION ===
+; Move by word (Option+Arrow on Mac)
+!Left::
+  Send, ^{Left}
+Return
+
+!Right::
+  Send, ^{Right}
+Return
+
+; Select by word (Option+Shift+Arrow on Mac)
+!+Left::
+  Send, ^+{Left}
+Return
+
+!+Right::
+  Send, ^+{Right}
+Return
+
+; Top/bottom of document (Cmd+Up/Down on Mac)
+#Up::
+  Send, ^{Home}
+Return
+
+#Down::
+  Send, ^{End}
+Return
+
+; Select to top/bottom of document
+#+Up::
+  Send, ^+{Home}
+Return
+
+#+Down::
+  Send, ^+{End}
+Return
+
+; === WINDOW/APP MANAGEMENT ===
+; Close window/app (Cmd+Q on Mac)
+#q::
+  Send, !{F4}
+Return
+
+; Minimize window (Cmd+M on Mac)
+#m::
+  Send, #{Down}
+Return
+
+; Send windows to left or right
+; Simulate a basic version of Spectacle's Cmd+Option+{Left,Right}
+#!Right::
+  ScreenX := GetScreenLeft()
+  ScreenY := GetScreenTop()
+  ScreenWidth := GetScreenWidth()
+  ScreenHeight := GetScreenHeight()
+
+  WinGet, ActiveHwnd, ID, A
+  WinRestore, ahk_id %ActiveHwnd% ; Unmaximize if needed
+  WinMove, ahk_id %ActiveHwnd%,, ScreenWidth / 2, 0, ScreenWidth / 2, ScreenHeight
+Return
+
+#!Left::
+  ScreenX := GetScreenLeft()
+  ScreenY := GetScreenTop()
+  ScreenWidth := GetScreenWidth()
+  ScreenHeight := GetScreenHeight()
+
+  WinGet, ActiveHwnd, ID, A
+  WinRestore, ahk_id %ActiveHwnd% ; Unmaximize if needed
+  WinMove, ahk_id %ActiveHwnd%,, 0, 0, ScreenWidth / 2, ScreenHeight
+Return
+
+; see also wintab.ahk1
+
+; Tab switching (depending on app)
+<#+}::
+  Send, ^{Tab}
+Return
+
+<#+{::
+  Send, ^+{Tab}
+Return
+
+#IfWinActive ahk_exe sublime_text.exe
+  <#+{::
+    Send, ^{PgUp}
+  Return
+
+  <#+}::
+    Send, ^{PgDn}
+  Return
+#IfWinActive
+
+; === BROWSER/APP SPECIFIC ===
+; Address bar (Cmd+L on Mac)
+#l::
+  Send, ^l
+Return
+
+; Reopen closed tab (already have Cmd+Shift+T)
+
+; === SEARCH/SPOTLIGHT ===
+; Spotlight-like search (Windows search)
+#Space::
+  Send, ^{Esc}
+Return
+
+; === MISC ===
+; Print (Cmd+P on Mac)
+#p::
+  Send, ^p
+Return
+
+; Quit/Force quit
+#+q::
+  Send, !{F4}
+Return
+
+; Cmd+Click = Ctrl+Click (for multi-select, opening links in new tabs, etc.)
+#LButton::
+  Send, ^{Click}
+Return
+
+; Screenshot
+#+4::
+  Send, #+{s}
+Return
