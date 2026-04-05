@@ -110,6 +110,13 @@ Return
   Send, ^t
 Return
 
+; Only for browsers
+#IfWinActive ahk_class Chrome_WidgetWin_1
+  #d::
+    Send, ^d
+  Return
+#IfWinActive
+
 ; Terminal-specific
 #IfWinActive ahk_exe WindowsTerminal.exe
   #t::
