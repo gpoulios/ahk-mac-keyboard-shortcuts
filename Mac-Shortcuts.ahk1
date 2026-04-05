@@ -80,6 +80,10 @@ Return
   Send, ^v
 Return
 
+$#+v::
+  Send, #v
+Return
+
 #x::
   Send, ^x
 Return
