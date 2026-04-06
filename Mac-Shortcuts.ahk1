@@ -115,6 +115,14 @@ Return
   #d::
     Send, ^d
   Return
+
+  #[::
+    Send, !{Left}
+  Return
+
+  #]::
+    Send, !{Right}
+  Return
 #IfWinActive
 
 ; Terminal-specific
