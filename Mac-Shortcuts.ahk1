@@ -123,6 +123,10 @@ Return
   #]::
     Send, !{Right}
   Return
+
+  #+r::
+    Send, ^+r
+  Return
 #IfWinActive
 
 ; Terminal-specific
