@@ -224,12 +224,6 @@ Return
   Send, ^\
 Return
 
-; Disable Windows key from opening Start menu
-LWin Up::Return
-RWin Up::Return
-
-
-
 ; === DELETION ===
 ; Delete line to the left (like Cmd+Backspace on Mac)
 #Backspace::
@@ -432,3 +426,14 @@ Return
     Send, !{Right}
   Return
 #IfWinActive
+
+
+#IfWinActive ahk_exe MarkText.exe
+  #/::
+    Send, ^/
+  Return
+#IfWinActive
+
+; Disable Windows key from opening Start menu
+LWin Up::Return
+RWin Up::Return
