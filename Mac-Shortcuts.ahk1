@@ -208,6 +208,15 @@ Return
   Send, +{F3}
 Return
 
+; Command palettes and print
+#+p::
+  Send, ^+p
+Return
+
+$^+p::
+  Send, #+p
+Return
+
 ; Text formatting (bold, italic, etc)
 #b::
   Send, ^b
