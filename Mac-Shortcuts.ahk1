@@ -181,6 +181,7 @@ Return
 Return
 
 #+z::
+#y::
   Send, ^+z
 Return
 
