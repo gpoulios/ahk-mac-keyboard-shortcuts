@@ -26,5 +26,6 @@ Return
 Return
 
 $!Tab::
+^Up::
   Send, #{Tab}
 Return
