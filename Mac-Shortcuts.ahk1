@@ -272,8 +272,16 @@ Return
   Send, ^{Left}
 Return
 
+$^Left::
+  Send, #^{Left}
+Return
+
 !Right::
   Send, ^{Right}
+Return
+
+$^Right::
+  Send, #^{Right}
 Return
 
 ; Select by word (Option+Shift+Arrow on Mac)
