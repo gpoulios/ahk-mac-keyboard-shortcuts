@@ -12,15 +12,19 @@
 
 ; Remap LWin-Tab to Alt-Tab
 <#Tab::
-  Send {Alt down}{Tab}
-  Keywait LWin
-  Send {Alt up}
-return
+  Send, {Alt down}{Tab}
+  Keywait, LWin
+  Send, {Alt up}
+Return
 
 ; Remap LWin-Shift-Tab to Alt-Shift-Tab
 <#+Tab::
   Send {Alt down}{Shift down}{Tab}
   Keywait LWin
-  Send {Alt up}
-  Send {Shift up}
-return
+  Send, {Alt up}
+  Send, {Shift up}
+Return
+
+$!Tab::
+  Send, #{Tab}
+Return
