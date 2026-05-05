@@ -397,7 +397,7 @@ Return
   Send, ^+{Tab}
 Return
 
-#IfWinActive ahk_exe sublime_text.exe
+#If (WinActive("ahk_exe sublime_text.exe") || WinActive("ahk_exe Code.exe"))
   <#+{::
     Send, ^{PgUp}
   Return
@@ -405,7 +405,7 @@ Return
   <#+}::
     Send, ^{PgDn}
   Return
-#IfWinActive
+#If
 
 ; === BROWSER/APP SPECIFIC ===
 ; Address bar (Cmd+L on Mac)
