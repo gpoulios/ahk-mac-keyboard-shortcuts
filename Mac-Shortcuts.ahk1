@@ -456,12 +456,11 @@ Return
   Return
 #IfWinActive
 
-
-#IfWinActive ahk_exe MarkText.exe
+#If (WinActive("ahk_exe MarkText.exe") || WinActive("ahk_exe Code.exe"))
   #/::
     Send, ^/
   Return
-#IfWinActive
+#If
 
 ; Disable Windows key from opening Start menu
 LWin Up::Return
