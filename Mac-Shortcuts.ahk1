@@ -405,6 +405,10 @@ Return
   <#+}::
     Send, ^{PgDn}
   Return
+
+  <#+k::
+    Send, ^+k
+  Return
 #If
 
 ; === BROWSER/APP SPECIFIC ===
