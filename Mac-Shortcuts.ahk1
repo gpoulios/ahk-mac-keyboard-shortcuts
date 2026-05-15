@@ -466,6 +466,9 @@ Return
   Return
 #If
 
+; Disable Alt key alone from putting focus on the menu
+Alt::Return
+
 ; Disable Windows key from opening Start menu
 LWin Up::Return
 RWin Up::Return
