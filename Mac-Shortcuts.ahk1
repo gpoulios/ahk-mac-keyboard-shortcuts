@@ -131,6 +131,10 @@ Return
 
 ; Terminal-specific
 #IfWinActive ahk_exe WindowsTerminal.exe
+  #v::
+    Send, ^+v
+  Return
+
   #t::
     Send, ^+d
   Return
