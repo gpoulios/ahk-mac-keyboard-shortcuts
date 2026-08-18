@@ -138,10 +138,6 @@ Return
   #t::
     Send, ^+d
   Return
-
-  ^d::
-    Send, exit{Enter}
-  Return
 #IfWinActive
 
 #w::
