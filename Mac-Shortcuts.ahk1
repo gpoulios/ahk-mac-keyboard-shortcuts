@@ -252,6 +252,14 @@ Return
 Return
 
 ; Delete word to the left (like Option+Backspace on Mac)
+; -- Terminal: Alt+Backspace -> Ctrl+W (0x17) -> OMP deletes word --
+#If WinActive("ahk_exe WindowsTerminal.exe")
+!Backspace::
+  Send, ^w
+Return
+#If
+
+; -- Everywhere else: Alt+Backspace -> Ctrl+Backspace (native word-delete) --
 !Backspace::
   Send, ^{Backspace}
 Return
