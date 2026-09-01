@@ -235,9 +235,23 @@ Return
   Send, ^k
 Return
 
-; Send/line break
-#Enter::
+; === Enter ===
+; Map Cmd+Enter -> Ctrl+Enter
+$#Enter::
   Send, ^{Enter}
+Return
+
+; -- Terminal: Alt+Enter or Shift+Enter -> Ctrl+j
+#If WinActive("ahk_exe WindowsTerminal.exe")
+  !Enter::
+  +Enter::
+    Send, ^j
+  Return
+#If
+
+; -- Everything else: Alt+Enter -> Cmd+Enter
+!Enter::
+  Send, #{Enter}
 Return
 
 ; 1Password browser shortcut
@@ -254,9 +268,9 @@ Return
 ; Delete word to the left (like Option+Backspace on Mac)
 ; -- Terminal: Alt+Backspace -> Ctrl+W (0x17) -> OMP deletes word --
 #If WinActive("ahk_exe WindowsTerminal.exe")
-!Backspace::
-  Send, ^w
-Return
+  !Backspace::
+    Send, ^w
+  Return
 #If
 
 ; -- Everywhere else: Alt+Backspace -> Ctrl+Backspace (native word-delete) --
