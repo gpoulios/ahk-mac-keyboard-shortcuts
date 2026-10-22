@@ -488,6 +488,19 @@ Return
   Return
 #If
 
+; Benq monitor input switch
+!+q::
+    Run, %ComSpec% /c winddcutil.exe setvcp 2 96 19,, Hide
+return
+
+!+w::
+    Run, %ComSpec% /c winddcutil.exe setvcp 2 96 15,, Hide
+return
+
+!+e::
+    Run, %ComSpec% /c winddcutil.exe setvcp 2 96 17,, Hide
+return
+
 ; Disable Alt key alone from putting focus on the menu
 Alt::Return
 
